@@ -1,11 +1,10 @@
 #
-# (C) Copyright 2011 Freescale Semiconductor, Inc.
-# Jason Liu <r64343@freescale.com>
+# USB armory MkI board Makefile
+# http://inversepath.com/usbarmory
 #
-# SPDX-License-Identifier:      GPL-2.0+
+# Copyright (C) 2015, Inverse Path
+# Andrej Rosano <andrej@inversepath.com>
 #
-# Adapted from freescale/mx53loco/Makefile by Andrej Rosano <andrej@inversepath.com>
-# for USB armory (inversepath.com/usbarmory) hardware
-#
+# SPDX-License-Identifier:|____GPL-2.0+
 
-obj-y			+= usbarmory.o
+obj-y	:= usbarmory.o
