@@ -11,6 +11,9 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
+/* Darwin support hax */
+#define DARWIN_ON_ARMORY 1
+
 #define CONFIG_MX53
 #define CONFIG_DISPLAY_CPUINFO
 #define CONFIG_DISPLAY_BOARDINFO
@@ -19,6 +22,12 @@
 #define CONFIG_OF_LIBFDT
 #define CONFIG_SYS_GENERIC_BOARD
 #define CONFIG_MXC_GPIO
+
+/* GenericBooter currently relies on ATAG support */
+#if DARWIN_ON_ARMORY
+#define CONFIG_SETUP_MEMORY_TAGS
+#define CONFIG_CMDLINE_TAG
+#endif /* DARWIN_ON_ARMORY */
 
 #include <asm/arch/imx-regs.h>
 #include <config_cmd_default.h>
@@ -81,6 +90,21 @@
 #define CONFIG_CMD_FUSE
 #define CONFIG_FSL_IIM
 
+/* Darwin boot */
+#if DARWIN_ON_ARMORY
+
+#define CONFIG_BOOTDELAY        5
+#define CONFIG_LOADADDR         0x74000000
+#define CONFIG_SYS_TEXT_BASE    0x77800000
+#define CONFIG_SYS_LOAD_ADDR    CONFIG_LOADADDR
+#define CONFIG_HOSTNAME         usbarmory
+#define CONFIG_BOOTARGS \
+        "rd=md0 debug=0x16e serial=3 -v symbolicate_panics=1"
+#define CONFIG_BOOTCOMMAND \
+        "fatload mmc 0:1 0x74000000 /uImage; bootm 0x74000000"
+
+#else /* !DARWIN_ON_ARMORY */
+
 /* Linux boot */
 #define CONFIG_BOOTDELAY	1
 #define CONFIG_LOADADDR		0x72000000
@@ -92,6 +116,8 @@
 #define CONFIG_BOOTCOMMAND \
 	"ext2load mmc 0:1 0x70800000 /boot/uImage; ext2load mmc 0:1 " \
 	"0x71000000 /boot/imx53-usbarmory.dtb; bootm 0x70800000 - 0x71000000"
+
+#endif /* DARWIN_ON_ARMORY */
 
 /* Physical Memory Map */
 #define CONFIG_NR_DRAM_BANKS		1
