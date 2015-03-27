@@ -90,7 +90,7 @@
 #define CONFIG_BOOTARGS \
 	"console=ttymxc0,115200 root=/dev/mmcblk0p1 rootwait rw"
 #define CONFIG_BOOTCOMMAND \
-	"ext2load mmc 0:1 0x70800000 /boot/uImage; ext2load mmc 0:1" \
+	"ext2load mmc 0:1 0x70800000 /boot/uImage; ext2load mmc 0:1 " \
 	"0x71000000 /boot/imx53-usbarmory.dtb; bootm 0x70800000 - 0x71000000"
 
 /* Physical Memory Map */
