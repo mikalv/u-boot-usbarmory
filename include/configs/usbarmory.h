@@ -99,7 +99,7 @@
 #define CONFIG_SYS_LOAD_ADDR    CONFIG_LOADADDR
 #define CONFIG_HOSTNAME         usbarmory
 #define CONFIG_BOOTARGS \
-        "rd=md0 debug=0x16e serial=3 -v symbolicate_panics=1"
+        "rd=md0 debug=0x16e serial=3 -s -v symbolicate_panics=1"
 #define CONFIG_BOOTCOMMAND \
         "fatload mmc 0:1 0x74000000 /uImage; bootm 0x74000000"
 
