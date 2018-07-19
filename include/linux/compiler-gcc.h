@@ -44,9 +44,10 @@
  */
 #if !defined(CONFIG_ARCH_SUPPORTS_OPTIMIZED_INLINING) || \
     !defined(CONFIG_OPTIMIZE_INLINING) || (__GNUC__ < 4)
-# define inline		inline		__attribute__((always_inline))
-# define __inline__	__inline__	__attribute__((always_inline))
-# define __inline	__inline	__attribute__((always_inline))
+/* XXX: check __GNUC_STDC_INLINE__, fix line length */
+# define inline        inline        __attribute__((always_inline)) __attribute__((__gnu_inline__))
+# define __inline__    __inline__    __attribute__((always_inline)) __attribute__((__gnu_inline__))
+# define __inline    __inline    __attribute__((always_inline)) __attribute__((__gnu_inline__))
 #endif
 
 #define __deprecated			__attribute__((deprecated))
@@ -88,6 +89,7 @@
 #define __always_unused			__attribute__((unused))
 
 #define __gcc_header(x) #x
-#define _gcc_header(x) __gcc_header(linux/compiler-gcc##x.h)
+//#define _gcc_header(x) __gcc_header(linux/compiler-gcc##x.h)
+#define _gcc_header(x) __gcc_header(linux/compiler-gcc4.h)
 #define gcc_header(x) _gcc_header(x)
 #include gcc_header(__GNUC__)
